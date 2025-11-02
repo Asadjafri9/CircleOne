@@ -230,8 +230,7 @@ def logout():
 
 @app.route('/auth/google')
 def google_login():
-    """Initiate Google OAuth flow"""
-    redirect_uri = url_for('google_callback', _external=True)
+    redirect_uri = f"{app.config['APP_URL']}/auth/google/callback"
     print("DEBUG REDIRECT URI:", redirect_uri)
     # Force Google to show account selection screen
     return google.authorize_redirect(
