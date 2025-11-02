@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+
+{% block title %}{{ profile.user.name }} - Professional Directory{% endblock %}
+
+{% block content %}
+<div class="professional-detail-page">
+    <div class="professional-header-section">
+        <div class="professional-header-content">
+            {% if profile.user.profile_photo %}
+            <img src="{{ profile.user.profile_photo }}" alt="{{ profile.user.name }}" class="profile-photo-xlarge">
+            {% else %}
+            <div class="profile-photo-placeholder-xlarge">
+                {{ profile.user.name[0].upper() }}
+            </div>
+            {% endif %}
+            
+            <div class="professional-title-section">
+                <h1>{{ profile.user.name }}</h1>
+                <p class="job-title-large">{{ profile.job_title }}</p>
+                <div class="professional-stats">
+                    <span class="stat-item">👁 {{ profile.view_count }} views</span>
+                    <span class="stat-item">📅 Member since {{ profile.created_at.strftime('%B %Y') }}</span>
+                </div>
+            </div>
+        </div>
+        
+        {% if is_owner %}
+        <div class="professional-actions">
+            <a href="{{ url_for('edit_professional_profile') }}" class="btn btn-primary">Edit Profile</a>
+            <form method="POST" action="{{ url_for('delete_professional_profile') }}" style="display: inline;" onsubmit="return confirm('Are you sure you want to delete your professional profile?');">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+        </div>
+        {% endif %}
+    </div>
+
+    <div class="professional-detail-content">
+        <div class="professional-main-info">
+            {% if profile.summary %}
+            <section class="info-section">
+                <h2>About</h2>
+                <p>{{ profile.summary }}</p>
+            </section>
+            {% endif %}
+
+            {% if profile.how_i_help %}
+            <section class="info-section">
+                <h2>How I Can Help</h2>
+                <p>{{ profile.how_i_help }}</p>
+            </section>
+            {% endif %}
+
+            {% if profile.get_skills() %}
+            <section class="info-section">
+                <h2>Skills & Expertise</h2>
+                <div class="skills-list">
+                    {% for skill in profile.get_skills() %}
+                    <span class="skill-tag-large">{{ skill }}</span>
+                    {% endfor %}
+                </div>
+            </section>
+            {% endif %}
+
+            {% if profile.linkedin_url or (profile.contact_visible and profile.user.email) %}
+            <section class="info-section">
+                <h2>Contact Information</h2>
+                <div class="contact-grid">
+                    {% if profile.contact_visible and profile.user.email %}
+                    <div class="contact-item">
+                        <strong>📧 Email:</strong>
+                        <a href="mailto:{{ profile.user.email }}">{{ profile.user.email }}</a>
+                    </div>
+                    {% endif %}
+                    
+                    {% if profile.linkedin_url %}
+                    <div class="contact-item">
+                        <strong>💼 LinkedIn:</strong>
+                        <a href="{{ profile.linkedin_url }}" target="_blank" rel="noopener">View Profile</a>
+                    </div>
+                    {% endif %}
+                </div>
+                
+                {% if not profile.contact_visible %}
+                <p class="contact-note">
+                    <small>📧 Email contact is private. Connect via LinkedIn to get in touch.</small>
+                </p>
+                {% endif %}
+            </section>
+            {% endif %}
+        </div>
+
+        <div class="professional-sidebar">
+            <div class="sidebar-card">
+                <h3>Visibility Status</h3>
+                {% if profile.consent_given %}
+                <p class="status-badge status-public">✓ Public Profile</p>
+                <p><small>This profile is visible in the directory</small></p>
+                {% else %}
+                <p class="status-badge status-private">🔒 Private Profile</p>
+                <p><small>This profile is not publicly visible</small></p>
+                {% endif %}
+            </div>
+            
+            <div class="sidebar-card">
+                <a href="{{ url_for('professionals') }}" class="btn btn-secondary btn-block">← Back to Directory</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

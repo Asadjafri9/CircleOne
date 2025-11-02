@@ -1,0 +1,142 @@
+{% extends "base.html" %}
+
+{% block title %}{{ 'Edit' if profile else 'Create' }} Professional Profile{% endblock %}
+
+{% block content %}
+<div class="professional-form-page">
+    <div class="form-header">
+        <h1>{{ 'Edit' if profile else 'Create' }} Professional Profile</h1>
+        <p class="subtitle">Share your expertise with the community</p>
+    </div>
+
+    <form method="POST" class="professional-form">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+        <div class="form-section">
+            <h2>Basic Information</h2>
+            
+            <div class="form-group">
+                <label for="job_title">Job Title / Professional Role *</label>
+                <input type="text" 
+                       id="job_title" 
+                       name="job_title" 
+                       value="{{ profile.job_title if profile else '' }}"
+                       required 
+                       placeholder="e.g., Senior Software Engineer, Marketing Consultant"
+                       class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="summary">Professional Summary</label>
+                <textarea id="summary" 
+                          name="summary" 
+                          rows="5" 
+                          class="form-control"
+                          placeholder="Tell us about your professional background and experience...">{{ profile.summary if profile else '' }}</textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="how_i_help">How I Can Help</label>
+                <textarea id="how_i_help" 
+                          name="how_i_help" 
+                          rows="4" 
+                          class="form-control"
+                          placeholder="Describe what services or assistance you can provide to others...">{{ profile.how_i_help if profile else '' }}</textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="skills">Skills (comma-separated)</label>
+                <input type="text" 
+                       id="skills" 
+                       name="skills" 
+                       value="{{ ', '.join(profile.get_skills()) if profile else '' }}"
+                       placeholder="e.g., Python, JavaScript, Project Management, Marketing"
+                       class="form-control">
+                <small class="form-text">Separate skills with commas</small>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <h2>Contact & Social</h2>
+            
+            <div class="form-group">
+                <label for="linkedin_url">LinkedIn Profile URL</label>
+                <input type="url" 
+                       id="linkedin_url" 
+                       name="linkedin_url" 
+                       value="{{ profile.linkedin_url if profile else '' }}"
+                       placeholder="https://www.linkedin.com/in/yourprofile"
+                       class="form-control">
+            </div>
+
+            <div class="form-group">
+                <div class="checkbox-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" 
+                               name="contact_visible" 
+                               {% if profile and profile.contact_visible %}checked{% endif %}>
+                        <span>Make my email address visible on my profile</span>
+                    </label>
+                    <small class="form-text">Allow others to contact you directly via email</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-section consent-section">
+            <h2>Privacy & Consent</h2>
+            
+            <div class="consent-box">
+                <div class="form-group">
+                    <div class="checkbox-group">
+                        <label class="checkbox-label consent-checkbox">
+                            <input type="checkbox" 
+                                   name="consent_given" 
+                                   id="consent_given"
+                                   {% if profile and profile.consent_given %}checked{% endif %}>
+                            <span>
+                                <strong>I consent to display my profile publicly</strong>
+                            </span>
+                        </label>
+                        <p class="consent-text">
+                            By checking this box, you agree to make your professional profile visible 
+                            in the directory. Your profile will include your name, job title, summary, 
+                            skills, and any contact information you've chosen to share. You can 
+                            revoke this consent at any time by editing your profile.
+                        </p>
+                    </div>
+                </div>
+
+                {% if profile and not profile.consent_given %}
+                <div class="warning-box">
+                    <p><strong>⚠ Profile Not Visible</strong></p>
+                    <p>Your profile is currently private. Check the consent box above to make it visible in the directory.</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary btn-large">
+                {{ 'Update Profile' if profile else 'Create Profile' }}
+            </button>
+            <a href="{{ url_for('professional_profile', id=profile.id) if profile else url_for('professionals') }}" 
+               class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+// Highlight the consent checkbox when form loads
+document.addEventListener('DOMContentLoaded', function() {
+    const consentCheckbox = document.getElementById('consent_given');
+    const consentSection = document.querySelector('.consent-section');
+    
+    if (consentCheckbox && !consentCheckbox.checked) {
+        consentSection.style.border = '2px solid #ff9800';
+        consentSection.style.borderRadius = '8px';
+        consentSection.style.padding = '1.5rem';
+    }
+});
+</script>
+{% endblock %}

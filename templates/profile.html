@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}Profile - CircleOne{% endblock %}
+
+{% block content %}
+<div class="profile-container">
+    <div class="profile-header">
+        {% if user.profile_photo %}
+        <img src="{{ user.profile_photo }}" alt="{{ user.name }}" class="profile-photo-large">
+        {% else %}
+        <div class="profile-photo-placeholder">{{ user.name[0].upper() }}</div>
+        {% endif %}
+        <h1>{{ user.name }}</h1>
+        <p class="profile-email">{{ user.email }}</p>
+    </div>
+    
+    <div class="profile-details">
+        <h2>Account Information</h2>
+        
+        <div class="profile-detail-item">
+            <label>User ID</label>
+            <span>{{ user.id }}</span>
+        </div>
+        
+        <div class="profile-detail-item">
+            <label>Email Address</label>
+            <span>{{ user.email }}</span>
+        </div>
+        
+        <div class="profile-detail-item">
+            <label>Full Name</label>
+            <span>{{ user.name }}</span>
+        </div>
+        
+        <div class="profile-detail-item">
+            <label>OAuth Provider</label>
+            <span class="provider-badge {{ user.oauth_provider }}">
+                {{ user.oauth_provider.title() }}
+            </span>
+        </div>
+        
+        <div class="profile-detail-item">
+            <label>Theme Preference</label>
+            <span>{{ user.theme_preference.title() }}</span>
+        </div>
+        
+        <div class="profile-detail-item">
+            <label>Account Created</label>
+            <span>{{ user.created_at.strftime('%B %d, %Y at %I:%M %p') }}</span>
+        </div>
+    </div>
+    
+    <div class="profile-actions">
+        <button class="btn btn-primary" onclick="toggleTheme()">Toggle Theme</button>
+        <a href="{{ url_for('dashboard') }}" class="btn btn-secondary">Back to Dashboard</a>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // Use the global toggleTheme function from main.js
+    // It will update the theme immediately and save to database
+    // The icon is updated automatically by updateThemeIcon()
+</script>
+{% endblock %}

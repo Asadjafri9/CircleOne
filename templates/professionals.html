@@ -1,0 +1,145 @@
+{% extends "base.html" %}
+
+{% block title %}Professional Directory{% endblock %}
+
+{% block content %}
+<div class="professionals-page">
+    <div class="page-header">
+        <h1>Professional Directory</h1>
+        <p class="subtitle">Connect with talented professionals</p>
+        {% if current_user.is_authenticated %}
+        <a href="{{ url_for('edit_professional_profile') }}" class="btn btn-primary">
+            {% if current_user.professional_profile %}Edit Your Profile{% else %}Create Your Profile{% endif %}
+        </a>
+        {% endif %}
+    </div>
+
+    <!-- Search and Filter Section -->
+    <div class="search-filter-section">
+        <form method="GET" action="{{ url_for('professionals') }}" class="search-form">
+            <div class="search-inputs">
+                <input type="text" 
+                       name="search" 
+                       id="professional-search"
+                       placeholder="Search by name, title, or summary..." 
+                       value="{{ search }}"
+                       class="search-input"
+                       autocomplete="off">
+                
+                <select name="skill" id="skill-filter" class="filter-select">
+                    <option value="">All Skills</option>
+                    {% for s in skills %}
+                    <option value="{{ s }}" {% if s == selected_skill %}selected{% endif %}>
+                        {{ s }}
+                    </option>
+                    {% endfor %}
+                </select>
+                
+                <button type="submit" class="btn btn-primary">Search</button>
+                <a href="{{ url_for('professionals') }}" class="btn btn-secondary">Clear</a>
+            </div>
+        </form>
+    </div>
+
+    <!-- Results Count -->
+    <div class="results-info">
+        <p>Found {{ profiles|length }} professional{{ 's' if profiles|length != 1 else '' }}</p>
+    </div>
+
+    <!-- Professionals Grid -->
+    <div class="professionals-grid">
+        {% if profiles %}
+            {% for profile in profiles %}
+            <div class="professional-card"
+                 data-name="{{ profile.user.name.lower() }}"
+                 data-role="{{ profile.job_title.lower() }}"
+                 data-summary="{{ profile.summary.lower() if profile.summary else '' }}"
+                 data-skills="{{ ','.join(profile.get_skills()).lower() }}">
+                <a href="{{ url_for('professional_profile', id=profile.id) }}" class="professional-card-link">
+                    <div class="professional-header">
+                        {% if profile.user.profile_photo %}
+                        <img src="{{ profile.user.profile_photo }}" alt="{{ profile.user.name }}" class="profile-photo-medium">
+                        {% else %}
+                        <div class="profile-photo-placeholder-medium">
+                            {{ profile.user.name[0].upper() }}
+                        </div>
+                        {% endif %}
+                        
+                        <div class="professional-info">
+                            <h3>{{ profile.user.name }}</h3>
+                            <p class="job-title">{{ profile.job_title }}</p>
+                        </div>
+                    </div>
+                    
+                    {% if profile.summary %}
+                    <p class="professional-summary">
+                        {{ profile.summary[:120] }}{% if profile.summary|length > 120 %}...{% endif %}
+                    </p>
+                    {% endif %}
+                    
+                    {% if profile.get_skills() %}
+                    <div class="skills-preview">
+                        {% for skill in profile.get_skills()[:3] %}
+                        <span class="skill-tag">{{ skill }}</span>
+                        {% endfor %}
+                        {% if profile.get_skills()|length > 3 %}
+                        <span class="skill-tag more">+{{ profile.get_skills()|length - 3 }}</span>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                    
+                    <div class="professional-meta">
+                        <span class="view-count">👁 {{ profile.view_count }} views</span>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="no-results">
+                <h3>No professionals found</h3>
+                <p>Try adjusting your search criteria or be the first to create a profile!</p>
+                {% if current_user.is_authenticated %}
+                <a href="{{ url_for('edit_professional_profile') }}" class="btn btn-primary">Create Your Profile</a>
+                {% endif %}
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/search.js') }}"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize instant search
+    const professionalSearch = new DirectorySearch(
+        '.professionals-page',
+        '.professionals-grid',
+        '#professional-search',
+        ['#skill-filter']
+    );
+    
+    // Add clear all button functionality
+    const clearButton = document.querySelector('a[href*="professionals"]:not([href*="profile"])');
+    if (clearButton && clearButton.textContent.includes('Clear')) {
+        clearButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            professionalSearch.clearFilters();
+            window.history.pushState({}, '', '{{ url_for("professionals") }}');
+        });
+    }
+    
+    // Extract professional names and titles for autocomplete
+    const searchTerms = [];
+    document.querySelectorAll('.professional-card').forEach(card => {
+        if (card.dataset.name) searchTerms.push(card.dataset.name);
+        if (card.dataset.role) searchTerms.push(card.dataset.role);
+    });
+    
+    // Initialize autocomplete if we have data
+    if (searchTerms.length > 0) {
+        new SearchAutocomplete('#professional-search', [...new Set(searchTerms)]);
+    }
+});
+</script>
+{% endblock %}

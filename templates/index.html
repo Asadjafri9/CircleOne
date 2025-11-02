@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+
+{% block title %}Home - CircleOne{% endblock %}
+
+{% block content %}
+<div class="hero-modern">
+    <div class="hero-content">
+        <div class="hero-badge">✨ New Features Available</div>
+        <h1 class="hero-title animated-gradient-text">Connect, Discover & Grow Your Network</h1>
+        <p class="hero-description">
+            A powerful platform to showcase your business and connect with professionals worldwide.
+            Join our thriving community today!
+        </p>
+        <div class="hero-buttons">
+            {% if current_user.is_authenticated %}
+                <a href="{{ url_for('dashboard') }}" class="btn btn-primary btn-large btn-glow">
+                    <span>Go to Dashboard</span>
+                    <span style="margin-left: 8px;">→</span>
+                </a>
+                <a href="{{ url_for('businesses') }}" class="btn btn-outline btn-large">Browse Businesses</a>
+            {% else %}
+                <a href="{{ url_for('login') }}" class="btn btn-primary btn-large btn-glow">
+                    <span>Get Started Free</span>
+                    <span style="margin-left: 8px;">→</span>
+                </a>
+                <a href="{{ url_for('professionals') }}" class="btn btn-outline btn-large">View Professionals</a>
+            {% endif %}
+        </div>
+        
+        <div class="hero-stats">
+            <div class="stat">
+                <div class="stat-number">{{ total_members }}{% if total_members >= 100 %}+{% endif %}</div>
+                <div class="stat-label">Active Members</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">{{ total_businesses }}{% if total_businesses >= 50 %}+{% endif %}</div>
+                <div class="stat-label">Businesses</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">24/7</div>
+                <div class="stat-label">Support</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="hero-visual parallax">
+        <div class="floating-card card-1">
+            <div class="card-icon">🏢</div>
+            <div class="card-text">Business Listings</div>
+        </div>
+        <div class="floating-card card-2">
+            <div class="card-icon">👥</div>
+            <div class="card-text">Professional Network</div>
+        </div>
+        <div class="floating-card card-3">
+            <div class="card-icon">📊</div>
+            <div class="card-text">Analytics Dashboard</div>
+        </div>
+    </div>
+</div>
+
+<div class="features-section">
+    <h2 class="section-heading">Why Choose Us?</h2>
+    <div class="features-grid">
+        <div class="feature-card">
+            <div class="feature-icon" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                <span>🔐</span>
+            </div>
+            <h3>Secure Authentication</h3>
+            <p>Login safely with Google or Microsoft OAuth. Your data is protected with enterprise-grade security.</p>
+        </div>
+        
+        <div class="feature-card">
+            <div class="feature-icon" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                <span>🚀</span>
+            </div>
+            <h3>Fast & Reliable</h3>
+            <p>Lightning-fast performance with 99.9% uptime. Access your dashboard anytime, anywhere.</p>
+        </div>
+        
+        <div class="feature-card">
+            <div class="feature-icon" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                <span>📱</span>
+            </div>
+            <h3>Fully Responsive</h3>
+            <p>Perfect experience on desktop, tablet, and mobile. Works seamlessly on all devices.</p>
+        </div>
+        
+        <div class="feature-card">
+            <div class="feature-icon" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
+                <span>🌙</span>
+            </div>
+            <h3>Dark Mode</h3>
+            <p>Toggle between light and dark themes. Your preference is automatically saved.</p>
+        </div>
+        
+        <div class="feature-card">
+            <div class="feature-icon" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                <span>🔍</span>
+            </div>
+            <h3>Advanced Search</h3>
+            <p>Find businesses and professionals with powerful search and filter capabilities.</p>
+        </div>
+        
+        <div class="feature-card">
+            <div class="feature-icon" style="background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);">
+                <span>📸</span>
+            </div>
+            <h3>Image Upload</h3>
+            <p>Upload business logos and profile pictures with Cloudinary integration.</p>
+        </div>
+    </div>
+</div>
+
+<div class="cta-section">
+    <h2>Ready to Get Started?</h2>
+    <p>Join thousands of businesses and professionals today</p>
+    {% if not current_user.is_authenticated %}
+        <a href="{{ url_for('login') }}" class="btn btn-primary btn-large btn-glow">Create Your Account</a>
+    {% endif %}
+</div>
+{% endblock %}
