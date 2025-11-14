@@ -239,13 +239,13 @@ def logout():
 @app.route('/auth/google')
 def google_login():
     """Initiate Google OAuth flow"""
-    redirect_uri = url_for('google_callback', _external=True)
-    print("DEBUG REDIRECT URI:", redirect_uri)
-    # Force Google to show account selection screen
+    redirect_uri = url_for('google_callback', _external=True, _scheme='https')
+    print("DEBUG REDIRECT URI:", redirect_uri)  # Should now show https
     return google.authorize_redirect(
         redirect_uri,
-        prompt='select_account'  # This allows choosing different accounts
+        prompt='select_account'
     )
+
 
 
 @app.route('/auth/google/callback')
