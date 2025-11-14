@@ -58,10 +58,16 @@ def index():
     # Get actual counts from database
     total_members = User.query.count()
     total_businesses = BusinessListing.query.count()
-    
-    return render_template('index.html', 
-                          total_members=total_members,
-                          total_businesses=total_businesses)
+
+    return render_template('index.html',
+                           total_members=total_members,
+                           total_businesses=total_businesses)
+
+
+@app.route('/responsive-test')
+def responsive_test():
+    """Responsive design test page"""
+    return render_template('responsive_test.html')
 
 
 @app.route('/check-oauth')
@@ -97,20 +103,21 @@ def login():
     """Login page"""
     if current_user.is_authenticated:
         return redirect(url_for('dashboard'))
-    
+
     if request.method == 'POST':
         username_or_email = request.form.get('username_or_email', '').strip()
         password = request.form.get('password', '')
-        
+
         if not username_or_email or not password:
             flash('Please fill in all fields', 'error')
             return redirect(url_for('login'))
-        
+
         # Try to find user by username or email
         user = User.query.filter(
-            (User.username == username_or_email) | (User.email == username_or_email)
+            (User.username == username_or_email) | (
+                User.email == username_or_email)
         ).first()
-        
+
         if user and user.check_password(password):
             login_user(user)
             flash(f'Welcome back, {user.name}!', 'success')
@@ -118,7 +125,7 @@ def login():
         else:
             flash('Invalid username/email or password', 'error')
             return redirect(url_for('login'))
-    
+
     return render_template('login.html')
 
 
@@ -127,41 +134,41 @@ def signup():
     """User registration page"""
     if current_user.is_authenticated:
         return redirect(url_for('dashboard'))
-    
+
     if request.method == 'POST':
         username = request.form.get('username', '').strip()
         name = request.form.get('name', '').strip()
         email = request.form.get('email', '').strip()
         password = request.form.get('password', '')
         confirm_password = request.form.get('confirm_password', '')
-        
+
         # Validation
         if not username or not name or not password:
             flash('Please fill in all required fields', 'error')
             return redirect(url_for('signup'))
-        
+
         if password != confirm_password:
             flash('Passwords do not match', 'error')
             return redirect(url_for('signup'))
-        
+
         if len(password) < 6:
             flash('Password must be at least 6 characters long', 'error')
             return redirect(url_for('signup'))
-        
+
         # Check if username already exists
         if User.query.filter_by(username=username).first():
             flash('Username already exists. Please choose another.', 'error')
             return redirect(url_for('signup'))
-        
+
         # Check if email already exists (if provided)
         if email and User.query.filter_by(email=email).first():
             flash('Email already exists. Please use another or login.', 'error')
             return redirect(url_for('signup'))
-        
+
         # Create new user
         # For SQLite compatibility, use placeholder email if none provided
         user_email = email if email else f'{username}@circleone.local'
-        
+
         new_user = User(
             username=username,
             name=name,
@@ -171,18 +178,19 @@ def signup():
             theme_preference='light'
         )
         new_user.set_password(password)
-        
+
         try:
             db.session.add(new_user)
             db.session.commit()
             login_user(new_user)
-            flash(f'Welcome to CircleOne, {name}! Your account has been created.', 'success')
+            flash(
+                f'Welcome to CircleOne, {name}! Your account has been created.', 'success')
             return redirect(url_for('dashboard'))
         except Exception as e:
             db.session.rollback()
             flash(f'Error creating account: {str(e)}', 'error')
             return redirect(url_for('signup'))
-    
+
     return render_template('signup.html')
 
 
@@ -192,7 +200,7 @@ def test_login():
     # If already logged in, redirect to dashboard
     if current_user.is_authenticated:
         return redirect(url_for('dashboard'))
-    
+
     # Create or get test user
     test_user = User.query.filter_by(email='test@example.com').first()
     if not test_user:
@@ -230,7 +238,8 @@ def logout():
 
 @app.route('/auth/google')
 def google_login():
-    redirect_uri = f"{app.config['APP_URL']}/auth/google/callback"
+    """Initiate Google OAuth flow"""
+    redirect_uri = url_for('google_callback', _external=True)
     print("DEBUG REDIRECT URI:", redirect_uri)
     # Force Google to show account selection screen
     return google.authorize_redirect(
@@ -684,6 +693,8 @@ with app.app_context():
 if __name__ == '__main__':
     # Get port from environment variable (Railway/Heroku) or default to 5000
     port = int(os.environ.get('PORT', 5000))
-    # Disable debug mode in production (Railway sets RAILWAY_ENVIRONMENT)
-    debug_mode = os.environ.get('RAILWAY_ENVIRONMENT') != 'production'
-    app.run(debug=debug_mode, host='0.0.0.0', port=port)
+    # Check if running in production (Railway sets RAILWAY_ENVIRONMENT)
+    is_production = os.environ.get('RAILWAY_ENVIRONMENT') == 'production'
+    # Disable debug mode and reloader in production for stability
+    app.run(debug=not is_production, use_reloader=not is_production,
+            host='0.0.0.0', port=port)
