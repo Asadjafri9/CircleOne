@@ -198,11 +198,10 @@ body {
     padding: 2rem;
     border-radius: 8px;
     box-shadow: var(--shadow);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: box-shadow 0.3s ease;
 }
 
 .feature-card:hover {
-    transform: translateY(-5px);
     box-shadow: var(--shadow-hover);
 }
 
@@ -408,11 +407,10 @@ body {
     display: flex;
     align-items: center;
     gap: 1.5rem;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: box-shadow 0.3s ease;
 }
 
 .stat-card:hover {
-    transform: translateY(-5px);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
 }
 
@@ -465,11 +463,11 @@ body {
     display: flex;
     align-items: flex-start;
     gap: 1rem;
-    transition: transform 0.2s ease;
+    transition: box-shadow 0.2s ease;
 }
 
 .info-card:hover {
-    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
 }
 
 .info-icon {
@@ -664,30 +662,314 @@ body {
     opacity: 0.7;
 }
 
-/* Responsive Design */
+/* ========== COMPREHENSIVE RESPONSIVE DESIGN ========== */
+
+/* Extra Large Screens */
+@media (min-width: 1400px) {
+    .container {
+        max-width: 1400px;
+    }
+
+    .hero-title {
+        font-size: 4rem;
+    }
+
+    .features-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Tablet Landscape (768px - 1024px) */
+@media (max-width: 1024px) {
+    .container {
+        padding: 0 1.5rem;
+    }
+
+    .hero-modern {
+        gap: 3rem;
+    }
+
+    .businesses-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .professionals-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Tablet Portrait & Mobile Landscape (768px) */
 @media (max-width: 768px) {
+    .container {
+        padding: 0 1rem;
+    }
+
+    /* Typography Scaling */
     .hero h1 {
         font-size: 2rem;
     }
-    
+
+    .hero-title {
+        font-size: 2rem;
+        line-height: 1.3;
+    }
+
+    .page-header h1 {
+        font-size: 2rem;
+    }
+
+    .section-heading {
+        font-size: 1.75rem;
+    }
+
+    /* Grid Layouts */
     .features {
         grid-template-columns: 1fr;
+        gap: 1.5rem;
     }
-    
+
+    .features-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
     .dashboard-grid {
         grid-template-columns: 1fr;
     }
-    
+
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+
+    .info-cards-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Navigation */
     .nav-menu {
         flex-wrap: wrap;
     }
-    
+
+    /* Cards & Buttons */
     .login-card {
-        padding: 2rem;
+        padding: 1.5rem;
+        margin: 1rem;
     }
-    
-    .profile-actions {
+
+    .feature-card,
+    .business-card,
+    .professional-card {
+        padding: 1.5rem;
+    }
+
+    .btn {
+        padding: 0.65rem 1.25rem;
+        font-size: 0.95rem;
+    }
+
+    .btn-large {
+        padding: 0.875rem 1.5rem;
+        font-size: 1rem;
+    }
+
+    /* Actions & Layouts */
+    .profile-actions,
+    .business-actions,
+    .form-actions {
         flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .profile-actions .btn,
+    .business-actions .btn {
+        width: 100%;
+    }
+
+    /* Spacing */
+    .main-content {
+        padding: 2rem 0;
+    }
+
+    .hero-modern {
+        padding: 2rem 0;
+    }
+
+    .features-section,
+    .cta-section {
+        padding: 2rem 0;
+    }
+}
+
+/* Mobile (480px) */
+@media (max-width: 480px) {
+    .container {
+        padding: 0 0.75rem;
+    }
+
+    /* Typography */
+    .hero-title {
+        font-size: 1.75rem;
+    }
+
+    .hero-description {
+        font-size: 1rem;
+    }
+
+    .section-heading {
+        font-size: 1.5rem;
+    }
+
+    .page-header h1 {
+        font-size: 1.75rem;
+    }
+
+    /* Navigation */
+    .nav-brand a {
+        font-size: 1.25rem;
+    }
+
+    /* Stats Grid - Single Column on Very Small Screens */
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .stat-card {
+        padding: 1rem;
+    }
+
+    .stat-icon {
+        width: 50px;
+        height: 50px;
+    }
+
+    .stat-info h3 {
+        font-size: 1.5rem;
+    }
+
+    /* Hero Stats */
+    .hero-stats {
+        gap: 1.5rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .stat-number {
+        font-size: 1.5rem;
+    }
+
+    /* Cards */
+    .feature-card,
+    .business-card,
+    .professional-card,
+    .login-card,
+    .business-form,
+    .professional-form {
+        padding: 1.25rem;
+    }
+
+    /* Buttons - Larger Touch Targets */
+    .btn {
+        padding: 0.75rem 1.5rem;
+        font-size: 1rem;
+        min-height: 44px;
+        /* iOS recommended touch target */
+    }
+
+    .btn-sm {
+        padding: 0.625rem 1rem;
+        min-height: 38px;
+    }
+
+    .theme-toggle-btn {
+        padding: 0.625rem 1rem;
+        font-size: 0.875rem;
+        min-width: 90px;
+    }
+
+    /* Forms */
+    .form-control,
+    .search-input,
+    .filter-select {
+        padding: 0.875rem;
+        font-size: 16px;
+        /* Prevents zoom on iOS */
+    }
+
+    /* Dashboard Header */
+    .dashboard-header-enhanced h1 {
+        font-size: 1.5rem;
+    }
+
+    .dashboard-avatar,
+    .dashboard-avatar-placeholder {
+        width: 60px;
+        height: 60px;
+    }
+
+    /* Business/Professional Cards Grid */
+    .businesses-grid,
+    .professionals-grid {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+    }
+
+    /* Logo Sizes */
+    .business-logo-large,
+    .business-logo-placeholder-large {
+        width: 80px;
+        height: 80px;
+        font-size: 2rem;
+    }
+
+    .profile-photo-xlarge,
+    .profile-photo-placeholder-xlarge {
+        width: 100px;
+        height: 100px;
+        font-size: 3rem;
+    }
+
+    /* Floating Cards - Stack Vertically */
+    .floating-card {
+        width: 100%;
+        max-width: none;
+        padding: 1rem;
+    }
+
+    /* Search Section */
+    .search-filter-section {
+        padding: 1.25rem;
+    }
+
+    /* Hero Buttons */
+    .hero-buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .hero-buttons .btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    /* CTA Section */
+    .cta-section {
+        padding: 2rem 1rem;
+        margin: 2rem 0;
+    }
+
+    .cta-section h2 {
+        font-size: 1.75rem;
+    }
+
+    .cta-section p {
+        font-size: 1rem;
+    }
+
+    /* Modal/Overlay Adjustments */
+    .nav-menu {
+        max-width: 100%;
+        width: 100%;
     }
 }
 
@@ -743,6 +1025,7 @@ body {
         transform: translateY(-20px);
         opacity: 0;
     }
+
     to {
         transform: translateY(0);
         opacity: 1;
@@ -844,11 +1127,11 @@ body {
 }
 
 /* Search Input Container */
-.search-inputs > * {
+.search-inputs>* {
     position: relative;
 }
 
-.search-input:focus + .search-suggestions {
+.search-input:focus+.search-suggestions {
     display: block;
 }
 
@@ -872,7 +1155,9 @@ body {
 }
 
 @keyframes spin {
-    to { transform: translateY(-50%) rotate(360deg); }
+    to {
+        transform: translateY(-50%) rotate(360deg);
+    }
 }
 
 /* Active Search Indicator */
@@ -910,6 +1195,7 @@ body {
         opacity: 0;
         transform: translateY(10px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -926,12 +1212,11 @@ body {
     background: var(--card-bg);
     border-radius: 8px;
     box-shadow: var(--shadow);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: box-shadow 0.3s ease;
     overflow: hidden;
 }
 
 .business-card:hover {
-    transform: translateY(-5px);
     box-shadow: var(--shadow-hover);
 }
 
@@ -1450,40 +1735,40 @@ textarea.form-control {
     .search-inputs {
         grid-template-columns: 1fr;
     }
-    
+
     .businesses-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .business-detail-content {
         grid-template-columns: 1fr;
     }
-    
+
     .business-header {
         flex-direction: column;
     }
-    
+
     .business-header-content {
         flex-direction: column;
         text-align: center;
     }
-    
+
     .business-actions {
         width: 100%;
         justify-content: center;
         margin-top: 1rem;
     }
-    
+
     .business-item {
         flex-direction: column;
         align-items: flex-start;
     }
-    
+
     .business-item-actions {
         width: 100%;
         margin-top: 1rem;
     }
-    
+
     .section-header {
         flex-direction: column;
         gap: 1rem;
@@ -1502,12 +1787,11 @@ textarea.form-control {
     background: var(--card-bg);
     border-radius: 8px;
     box-shadow: var(--shadow);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: box-shadow 0.3s ease;
     overflow: hidden;
 }
 
 .professional-card:hover {
-    transform: translateY(-5px);
     box-shadow: var(--shadow-hover);
 }
 
@@ -1878,31 +2162,31 @@ textarea.form-control {
     .professionals-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .professional-detail-content {
         grid-template-columns: 1fr;
     }
-    
+
     .professional-header-section {
         flex-direction: column;
     }
-    
+
     .professional-header-content {
         flex-direction: column;
         text-align: center;
     }
-    
+
     .professional-actions {
         width: 100%;
         justify-content: center;
         margin-top: 1rem;
     }
-    
+
     .professional-profile-card {
         flex-direction: column;
         align-items: flex-start;
     }
-    
+
     .profile-card-actions {
         width: 100%;
         margin-top: 1rem;
@@ -1947,7 +2231,7 @@ textarea.form-control {
     .hamburger {
         display: flex;
     }
-    
+
     .nav-menu {
         position: fixed;
         top: 0;
@@ -1963,11 +2247,11 @@ textarea.form-control {
         z-index: 1000;
         overflow-y: auto;
     }
-    
+
     .nav-menu.active {
         right: 0;
     }
-    
+
     .nav-menu a,
     .nav-menu button {
         width: 100%;
@@ -1975,7 +2259,7 @@ textarea.form-control {
         text-align: left;
         padding: 0.75rem 1rem;
     }
-    
+
     .nav-menu .theme-toggle-btn {
         width: 100%;
         justify-content: flex-start;
@@ -1992,9 +2276,19 @@ textarea.form-control {
 }
 
 @keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    25% { transform: translateX(-5px); }
-    75% { transform: translateX(5px); }
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-5px);
+    }
+
+    75% {
+        transform: translateX(5px);
+    }
 }
 
 .field-error-message {
@@ -2046,7 +2340,9 @@ textarea.form-control {
 }
 
 @keyframes spin {
-    to { transform: rotate(360deg); }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 /* Form Focus States */
@@ -2086,14 +2382,15 @@ textarea.form-control {
 /* Mobile Form Adjustments */
 @media (max-width: 768px) {
     .form-control {
-        font-size: 16px; /* Prevents zoom on iOS */
+        font-size: 16px;
+        /* Prevents zoom on iOS */
     }
-    
+
     .form-actions {
         flex-direction: column;
         width: 100%;
     }
-    
+
     .form-actions .btn {
         width: 100%;
     }
@@ -2277,20 +2574,28 @@ textarea.form-control {
 }
 
 @keyframes float {
-    0%, 100% { 
+
+    /* Disabled for stability */
+    0%,
+    100% {
         transform: translateY(0px);
     }
-    50% { 
-        transform: translateY(-20px);
+
+    50% {
+        transform: translateY(0px);
     }
 }
 
 @keyframes floatCenter {
-    0%, 100% { 
+
+    /* Disabled for stability */
+    0%,
+    100% {
         transform: translate(-50%, calc(-50% + 0px));
     }
-    50% { 
-        transform: translate(-50%, calc(-50% - 20px));
+
+    50% {
+        transform: translate(-50%, calc(-50% + 0px));
     }
 }
 
@@ -2299,6 +2604,7 @@ textarea.form-control {
         opacity: 0;
         transform: translateY(30px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -2328,11 +2634,10 @@ textarea.form-control {
     padding: 2rem;
     border-radius: 12px;
     box-shadow: var(--shadow);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: box-shadow 0.3s ease;
 }
 
 .features-grid .feature-card:hover {
-    transform: translateY(-5px);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
 }
 
@@ -2387,11 +2692,11 @@ textarea.form-control {
         grid-template-columns: 1fr;
         gap: 2rem;
     }
-    
+
     .hero-title {
         font-size: 2.5rem;
     }
-    
+
     .hero-visual {
         height: 400px;
         display: flex;
@@ -2401,7 +2706,7 @@ textarea.form-control {
         gap: 1rem;
         padding: 2rem 1rem;
     }
-    
+
     .floating-card {
         position: relative;
         top: auto;
@@ -2414,33 +2719,33 @@ textarea.form-control {
         max-width: 180px;
         padding: 1.25rem 1rem;
     }
-    
+
     .card-2 {
         transform: none;
         animation: float 3s ease-in-out infinite;
         animation-delay: 1s;
     }
-    
+
     .hero-stats {
         flex-wrap: wrap;
         gap: 2rem;
     }
-    
+
     .dashboard-header-enhanced {
         flex-direction: column;
         text-align: center;
     }
-    
+
     .welcome-section {
         flex-direction: column;
         text-align: center;
     }
-    
+
     .quick-actions {
         width: 100%;
         justify-content: center;
     }
-    
+
     .stats-grid {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -2569,8 +2874,8 @@ body::before {
     width: 200%;
     height: 200%;
     background: radial-gradient(circle at 20% 50%, rgba(66, 133, 244, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(52, 168, 83, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 40% 20%, rgba(234, 67, 53, 0.05) 0%, transparent 50%);
+        radial-gradient(circle at 80% 80%, rgba(52, 168, 83, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 20%, rgba(234, 67, 53, 0.05) 0%, transparent 50%);
     animation: gradientShift 20s ease infinite;
     pointer-events: none;
     z-index: -1;
@@ -2578,17 +2883,21 @@ body::before {
 
 [data-theme="dark"] body::before {
     background: radial-gradient(circle at 20% 50%, rgba(66, 133, 244, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(52, 168, 83, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 40% 20%, rgba(234, 67, 53, 0.1) 0%, transparent 50%);
+        radial-gradient(circle at 80% 80%, rgba(52, 168, 83, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 40% 20%, rgba(234, 67, 53, 0.1) 0%, transparent 50%);
 }
 
 @keyframes gradientShift {
-    0%, 100% {
+
+    0%,
+    100% {
         transform: translate(0, 0) rotate(0deg);
     }
+
     33% {
         transform: translate(30px, -30px) rotate(120deg);
     }
+
     66% {
         transform: translate(-20px, 20px) rotate(240deg);
     }
@@ -2609,11 +2918,15 @@ body::before {
 }
 
 @keyframes floatIcon {
-    0%, 100% {
+
+    /* Disabled for stability */
+    0%,
+    100% {
         transform: translateY(0px) rotate(0deg);
     }
+
     50% {
-        transform: translateY(-10px) rotate(5deg);
+        transform: translateY(0px) rotate(0deg);
     }
 }
 
@@ -2660,39 +2973,62 @@ body::before {
 
 /* Pulse Animation for Important Elements */
 @keyframes pulse {
-    0%, 100% {
+
+    /* Disabled for stability */
+    0%,
+    100% {
         transform: scale(1);
         opacity: 1;
     }
+
     50% {
-        transform: scale(1.05);
-        opacity: 0.9;
+        transform: scale(1);
+        opacity: 1;
     }
 }
 
 .pulse {
-    animation: pulse 2s ease-in-out infinite;
+    /* Disabled animation */
+    animation: none;
 }
 
-/* Stagger Animation for Grid Items */
+/* Stagger Animation for Grid Items - Disabled for stability */
 .features-grid .feature-card,
 .businesses-grid .business-card,
 .professionals-grid .professional-card {
-    animation: slideInStagger 0.6s ease-out backwards;
+    animation: none;
 }
 
-.features-grid .feature-card:nth-child(1) { animation-delay: 0.1s; }
-.features-grid .feature-card:nth-child(2) { animation-delay: 0.2s; }
-.features-grid .feature-card:nth-child(3) { animation-delay: 0.3s; }
-.features-grid .feature-card:nth-child(4) { animation-delay: 0.4s; }
-.features-grid .feature-card:nth-child(5) { animation-delay: 0.5s; }
-.features-grid .feature-card:nth-child(6) { animation-delay: 0.6s; }
+.features-grid .feature-card:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.features-grid .feature-card:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.features-grid .feature-card:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.features-grid .feature-card:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+.features-grid .feature-card:nth-child(5) {
+    animation-delay: 0.5s;
+}
+
+.features-grid .feature-card:nth-child(6) {
+    animation-delay: 0.6s;
+}
 
 @keyframes slideInStagger {
     from {
         opacity: 0;
         transform: translateY(30px) scale(0.9);
     }
+
     to {
         opacity: 1;
         transform: translateY(0) scale(1);
@@ -2706,9 +3042,12 @@ body::before {
 }
 
 @keyframes glowPulse {
-    0%, 100% {
+
+    0%,
+    100% {
         box-shadow: 0 0 20px rgba(66, 133, 244, 0.5), 0 0 40px rgba(66, 133, 244, 0.3);
     }
+
     50% {
         box-shadow: 0 0 30px rgba(66, 133, 244, 0.8), 0 0 60px rgba(66, 133, 244, 0.5);
     }
@@ -2735,6 +3074,7 @@ body::before {
     from {
         transform: rotate(0deg);
     }
+
     to {
         transform: rotate(360deg);
     }
@@ -2760,6 +3100,7 @@ body::before {
     0% {
         background-position: -1000px 0;
     }
+
     100% {
         background-position: 1000px 0;
     }
@@ -2819,6 +3160,7 @@ html {
         transform: translateX(100%);
         opacity: 0;
     }
+
     to {
         transform: translateX(0);
         opacity: 1;
@@ -2829,6 +3171,7 @@ html {
     from {
         width: 0;
     }
+
     to {
         width: 4px;
     }
@@ -2890,9 +3233,12 @@ html {
 
 /* Text Gradient Animation */
 @keyframes gradientText {
-    0%, 100% {
+
+    0%,
+    100% {
         background-position: 0% 50%;
     }
+
     50% {
         background-position: 100% 50%;
     }
@@ -2959,6 +3305,7 @@ html {
         opacity: 0;
         transform: scale(0.98);
     }
+
     to {
         opacity: 1;
         transform: scale(1);
@@ -3008,8 +3355,1299 @@ body {
     transition: all 0.3s ease;
 }
 
-.search-input:focus + .search-input-container::after,
-.search-input:focus ~ .search-input-container::after {
+.search-input:focus+.search-input-container::after,
+.search-input:focus~.search-input-container::after {
     opacity: 1;
     transform: translateY(-50%) scale(1.2);
+}
+
+/* ========== ADDITIONAL RESPONSIVE UTILITIES ========== */
+
+/* Prevent horizontal scroll on mobile */
+body {
+    overflow-x: hidden;
+}
+
+/* Ensure images are responsive */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Responsive tables */
+.table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Hide elements on mobile */
+@media (max-width: 768px) {
+    .hide-mobile {
+        display: none !important;
+    }
+}
+
+/* Hide elements on desktop */
+@media (min-width: 769px) {
+    .hide-desktop {
+        display: none !important;
+    }
+}
+
+/* Responsive text alignment */
+@media (max-width: 768px) {
+    .text-center-mobile {
+        text-align: center !important;
+    }
+}
+
+/* Responsive spacing utilities */
+@media (max-width: 768px) {
+    .mt-mobile-0 {
+        margin-top: 0 !important;
+    }
+
+    .mb-mobile-0 {
+        margin-bottom: 0 !important;
+    }
+
+    .px-mobile-small {
+        padding-left: 0.5rem !important;
+        padding-right: 0.5rem !important;
+    }
+}
+
+/* Responsive overflow handling */
+.overflow-auto {
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Touch-friendly link spacing on mobile */
+@media (max-width: 768px) {
+    a {
+        padding: 0.25rem 0;
+        display: inline-block;
+    }
+
+    .nav-menu a {
+        padding: 0.75rem 1rem;
+    }
+}
+
+/* Prevent text from breaking layout */
+.text-break {
+    word-wrap: break-word;
+    word-break: break-word;
+    overflow-wrap: break-word;
+}
+
+/* Safe area insets for modern devices (iPhone X+) */
+@supports (padding: max(0px)) {
+    body {
+        padding-left: max(0px, env(safe-area-inset-left));
+        padding-right: max(0px, env(safe-area-inset-right));
+    }
+
+    .navbar {
+        padding-left: max(0px, env(safe-area-inset-left));
+        padding-right: max(0px, env(safe-area-inset-right));
+    }
+}
+
+/* Improved touch feedback */
+@media (hover: none) and (pointer: coarse) {
+
+    .btn,
+    .theme-toggle-btn,
+    .nav-menu a,
+    .business-card,
+    .professional-card,
+    .feature-card {
+        -webkit-tap-highlight-color: rgba(66, 133, 244, 0.1);
+        tap-highlight-color: rgba(66, 133, 244, 0.1);
+    }
+}
+
+/* Improve readability on small screens */
+@media (max-width: 480px) {
+    body {
+        -webkit-text-size-adjust: 100%;
+        text-size-adjust: 100%;
+    }
+
+    p,
+    li {
+        line-height: 1.6;
+    }
+}
+
+/* Focus visible for keyboard navigation */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: 3px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .btn {
+        border: 2px solid currentColor;
+    }
+
+    .feature-card,
+    .business-card,
+    .professional-card {
+        border: 2px solid var(--border-color);
+    }
+}
+
+/* ========== ENHANCED RESPONSIVE DESIGN FOR ALL PAGES ========== */
+
+/* Extra Small Devices (< 375px) - Very small phones */
+@media (max-width: 374px) {
+    .container {
+        padding: 0 0.5rem;
+    }
+
+    .hero-title {
+        font-size: 1.5rem;
+    }
+
+    .btn {
+        padding: 0.5rem 1rem;
+        font-size: 0.875rem;
+    }
+
+    .nav-brand a {
+        font-size: 1.1rem;
+    }
+
+    .theme-toggle-btn {
+        min-width: 80px;
+        font-size: 0.8rem;
+        padding: 0.4rem 0.8rem;
+    }
+}
+
+/* Mobile First - Enhanced Mobile Styles (375px - 480px) */
+@media (min-width: 375px) and (max-width: 480px) {
+
+    /* Better button spacing */
+    .hero-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        width: 100%;
+    }
+
+    .hero-actions .btn {
+        width: 100%;
+        max-width: 300px;
+        margin: 0 auto;
+    }
+
+    /* Improved form layouts */
+    .login-card,
+    .signup-card {
+        margin: 0.5rem;
+        padding: 1.5rem;
+    }
+
+    /* Better card spacing */
+    .business-card,
+    .professional-card,
+    .feature-card {
+        margin-bottom: 1rem;
+    }
+}
+
+/* Tablet Optimization (481px - 768px) */
+@media (min-width: 481px) and (max-width: 768px) {
+
+    /* Two-column layouts for tablets */
+    .businesses-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+
+    .professionals-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+
+    .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Better stats display */
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+
+    /* Hero section optimization */
+    .hero-stats {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: nowrap;
+    }
+}
+
+/* Landscape Mobile (small height) */
+@media (max-height: 500px) and (orientation: landscape) {
+    .hero-modern {
+        padding: 1.5rem 0;
+    }
+
+    .main-content {
+        padding: 1.5rem 0;
+    }
+
+    .nav-menu {
+        padding: 3rem 1.5rem 1.5rem;
+    }
+
+    .hero-title {
+        font-size: 1.75rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .hero-description {
+        margin-bottom: 1rem;
+    }
+}
+
+/* Desktop Small (769px - 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .container {
+        max-width: 960px;
+        padding: 0 2rem;
+    }
+
+    .businesses-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .professionals-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Large Desktop (1025px - 1399px) */
+@media (min-width: 1025px) and (max-width: 1399px) {
+    .container {
+        max-width: 1140px;
+    }
+
+    .businesses-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .professionals-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* ========== SPECIFIC PAGE RESPONSIVE ENHANCEMENTS ========== */
+
+/* Dashboard Page Responsive */
+@media (max-width: 768px) {
+    .dashboard-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+
+    .dashboard-header .profile-photo {
+        margin: 0 auto;
+    }
+
+    .dashboard-stats {
+        flex-direction: column;
+    }
+
+    .dashboard-actions {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .dashboard-actions .btn {
+        width: 100%;
+    }
+}
+
+/* Business Detail Page Responsive */
+@media (max-width: 768px) {
+    .business-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .business-logo {
+        margin: 0 auto 1.5rem;
+    }
+
+    .business-info {
+        width: 100%;
+    }
+
+    .business-contact {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .social-links {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+
+/* Professional Profile Page Responsive */
+@media (max-width: 768px) {
+    .profile-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .profile-photo-large {
+        margin: 0 auto 1.5rem;
+    }
+
+    .profile-details {
+        width: 100%;
+    }
+
+    .skills-list {
+        justify-content: center;
+    }
+
+    .skill-tag {
+        font-size: 0.875rem;
+        padding: 0.4rem 0.8rem;
+    }
+}
+
+/* Form Pages Responsive (Business & Professional Forms) */
+@media (max-width: 768px) {
+    .form-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    .form-group {
+        margin-bottom: 1.25rem;
+    }
+
+    .form-control,
+    .form-select {
+        font-size: 16px;
+        /* Prevents zoom on iOS */
+    }
+
+    textarea.form-control {
+        min-height: 120px;
+    }
+
+    .file-upload-area {
+        padding: 1.5rem;
+    }
+
+    .form-actions {
+        flex-direction: column-reverse;
+        gap: 1rem;
+    }
+
+    .form-actions .btn {
+        width: 100%;
+    }
+}
+
+/* Search & Filter Section Responsive */
+@media (max-width: 768px) {
+    .search-filters {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .search-bar,
+    .filter-group {
+        width: 100%;
+    }
+
+    .filter-select {
+        width: 100%;
+    }
+
+    .results-header {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: flex-start;
+    }
+}
+
+/* Login & Signup Pages Responsive */
+@media (max-width: 480px) {
+    .auth-container {
+        min-height: calc(100vh - 200px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+    }
+
+    .login-card,
+    .signup-card {
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+    }
+
+    .oauth-buttons {
+        flex-direction: column;
+    }
+
+    .btn-oauth {
+        width: 100%;
+    }
+
+    .divider {
+        margin: 1.5rem 0;
+    }
+}
+
+/* Footer Responsive */
+@media (max-width: 768px) {
+    .footer {
+        padding: 1.5rem 0;
+        text-align: center;
+    }
+
+    .footer .container {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .footer p {
+        font-size: 0.875rem;
+    }
+}
+
+/* Flash Messages Responsive */
+@media (max-width: 768px) {
+    .flash-messages {
+        position: fixed;
+        top: 70px;
+        left: 1rem;
+        right: 1rem;
+        z-index: 2000;
+    }
+
+    .flash-message {
+        padding: 0.75rem 1rem;
+        font-size: 0.9rem;
+    }
+
+    .flash-close {
+        font-size: 1.25rem;
+    }
+}
+
+/* Profile Photo & Avatar Responsive */
+@media (max-width: 480px) {
+    .profile-photo {
+        width: 60px;
+        height: 60px;
+    }
+
+    .profile-photo-large {
+        width: 100px;
+        height: 100px;
+    }
+
+    .business-logo {
+        width: 80px;
+        height: 80px;
+    }
+}
+
+/* View Count & Meta Info Responsive */
+@media (max-width: 480px) {
+
+    .view-count,
+    .meta-info {
+        font-size: 0.8rem;
+    }
+
+    .meta-info-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.25rem;
+    }
+}
+
+/* Hero Stats Responsive */
+@media (max-width: 480px) {
+    .hero-stats {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .stat-item {
+        min-width: auto;
+        width: 100%;
+        text-align: center;
+        padding: 1rem;
+        background: var(--card-bg);
+        border-radius: 8px;
+    }
+}
+
+/* Improved Touch Targets for Mobile */
+@media (max-width: 768px) {
+
+    /* Minimum 44x44px touch targets (Apple Guidelines) */
+    .btn,
+    .nav-menu a,
+    .hamburger,
+    .theme-toggle-btn,
+    .flash-close {
+        min-height: 44px;
+        min-width: 44px;
+    }
+
+    /* Better spacing for tap targets */
+    .btn {
+        margin: 0.25rem 0;
+    }
+
+    /* Larger form controls for easier interaction */
+    .form-control,
+    .form-select {
+        min-height: 44px;
+        padding: 0.75rem 1rem;
+    }
+
+    /* Social media links touch-friendly */
+    .social-link {
+        min-width: 44px;
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+/* Prevent Layout Shift */
+@media (max-width: 768px) {
+
+    /* Prevent content jumping during load */
+    img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    /* Smooth font scaling */
+    html {
+        font-size: 16px;
+    }
+
+    /* Better line heights for readability */
+    p,
+    li,
+    .description {
+        line-height: 1.6;
+    }
+}
+
+/* Accessibility Enhancements for Mobile */
+@media (max-width: 768px) {
+
+    /* Ensure focus indicators are visible */
+    *:focus-visible {
+        outline: 3px solid var(--primary-color);
+        outline-offset: 2px;
+    }
+
+    /* Skip to content link for screen readers */
+    .skip-to-content {
+        position: absolute;
+        top: -40px;
+        left: 0;
+        background: var(--primary-color);
+        color: white;
+        padding: 8px;
+        text-decoration: none;
+        z-index: 100;
+    }
+
+    .skip-to-content:focus {
+        top: 0;
+    }
+}
+
+/* Print Styles */
+@media print {
+
+    .navbar,
+    .hamburger,
+    .theme-toggle-btn,
+    .hero-actions,
+    .footer,
+    .flash-messages,
+    .btn,
+    .form-actions {
+        display: none !important;
+    }
+
+    body {
+        background: white;
+        color: black;
+    }
+
+    .container {
+        max-width: 100%;
+        padding: 0;
+    }
+
+    .business-card,
+    .professional-card,
+    .feature-card {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+}
+
+/* ========== RESPONSIVE GRID ENHANCEMENTS ========== */
+
+/* Auto-fit responsive grids */
+.responsive-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+@media (max-width: 480px) {
+    .responsive-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Flexbox responsive utilities */
+.flex-mobile-column {
+    display: flex;
+}
+
+@media (max-width: 768px) {
+    .flex-mobile-column {
+        flex-direction: column;
+    }
+}
+
+/* ========== PERFORMANCE OPTIMIZATIONS ========== */
+
+/* GPU acceleration for smoother animations on mobile */
+@media (max-width: 768px) {
+
+    .business-card,
+    .professional-card,
+    .feature-card,
+    .nav-menu,
+    .hamburger-line {
+        will-change: transform;
+        transform: translateZ(0);
+        backface-visibility: hidden;
+    }
+}
+
+/* Reduce animations on low-performance devices */
+@media (max-width: 480px) {
+    * {
+        animation-duration: 0.2s !important;
+        transition-duration: 0.2s !important;
+    }
+}
+
+/* ========== FINAL RESPONSIVE POLISH ========== */
+
+/* Ensure all interactive elements are accessible */
+@media (max-width: 768px) {
+
+    button,
+    a,
+    input,
+    select,
+    textarea {
+        -webkit-user-select: none;
+        user-select: none;
+    }
+
+    input,
+    textarea {
+        -webkit-user-select: text;
+        user-select: text;
+    }
+}
+
+/* Lazy loading images support */
+img[loading="lazy"] {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+img[loading="lazy"].loaded {
+    opacity: 1;
+}
+
+/* Fallback for browsers without lazy loading */
+img {
+    content-visibility: auto;
+}
+
+/* Smooth scrolling on all devices */
+html {
+    scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+}
+
+/* ========== ADDITIONAL RESPONSIVE FIXES ========== */
+
+/* Ensure navbar is always accessible */
+.navbar {
+    position: relative;
+    z-index: 999;
+}
+
+@media (max-width: 768px) {
+    .navbar .container {
+        position: relative;
+    }
+}
+
+/* Business & Professional Grid Responsive */
+.businesses-grid,
+.professionals-grid {
+    display: grid;
+    gap: 2rem;
+}
+
+@media (min-width: 1400px) {
+
+    .businesses-grid,
+    .professionals-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (min-width: 1025px) and (max-width: 1399px) {
+
+    .businesses-grid,
+    .professionals-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+
+    .businesses-grid,
+    .professionals-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+
+    .businesses-grid,
+    .professionals-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+}
+
+/* Form Section Responsive */
+.business-form,
+.professional-form {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+
+    .business-form,
+    .professional-form {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .business-form,
+    .professional-form {
+        padding: 1rem;
+    }
+}
+
+/* Dashboard Grid Responsive */
+.dashboard-grid {
+    display: grid;
+    gap: 2rem;
+}
+
+@media (min-width: 1025px) {
+    .dashboard-grid {
+        grid-template-columns: 2fr 1fr;
+    }
+}
+
+@media (max-width: 1024px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Dashboard Header Responsive */
+.dashboard-header-enhanced {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+@media (max-width: 768px) {
+    .dashboard-header-enhanced {
+        flex-direction: column;
+        gap: 1.5rem;
+        align-items: flex-start;
+    }
+
+    .welcome-section {
+        width: 100%;
+    }
+
+    .quick-actions {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .quick-actions .btn {
+        width: 100%;
+    }
+}
+
+/* Business Item List Responsive */
+.business-item,
+.professional-profile-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    background: var(--card-bg);
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+
+    .business-item,
+    .professional-profile-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .business-item-info,
+    .profile-card-info {
+        width: 100%;
+    }
+
+    .business-item-actions,
+    .profile-card-actions {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .business-item-actions .btn,
+    .profile-card-actions .btn {
+        flex: 1;
+        min-width: 80px;
+    }
+
+    .business-item-actions form,
+    .profile-card-actions form {
+        flex: 1;
+    }
+
+    .business-item-actions form button,
+    .profile-card-actions form button {
+        width: 100%;
+    }
+}
+
+/* Section Header Responsive */
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+@media (max-width: 768px) {
+    .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .section-header .btn {
+        width: 100%;
+    }
+}
+
+/* Info Cards Grid Responsive */
+.info-cards-grid {
+    display: grid;
+    gap: 1.5rem;
+}
+
+@media (min-width: 769px) {
+    .info-cards-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+    .info-cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .info-cards-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Stats Grid Responsive */
+.stats-grid {
+    display: grid;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+@media (min-width: 1025px) {
+    .stats-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Hero Modern Layout Responsive */
+.hero-modern {
+    display: flex;
+    gap: 4rem;
+    padding: 3rem 0;
+}
+
+@media (max-width: 1024px) {
+    .hero-modern {
+        flex-direction: column;
+        gap: 2rem;
+        text-align: center;
+    }
+
+    .hero-content {
+        width: 100%;
+    }
+
+    .hero-visual {
+        width: 100%;
+        min-height: 300px;
+    }
+}
+
+/* Hero Buttons Responsive */
+.hero-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+@media (max-width: 480px) {
+    .hero-buttons {
+        flex-direction: column;
+    }
+
+    .hero-buttons .btn {
+        width: 100%;
+    }
+}
+
+/* Features Grid Responsive */
+.features-grid {
+    display: grid;
+    gap: 2rem;
+}
+
+@media (min-width: 1025px) {
+    .features-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Search Filters Responsive */
+.search-filters {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+    .search-filters {
+        flex-direction: column;
+    }
+
+    .search-bar,
+    .filter-group,
+    .filter-select {
+        width: 100%;
+    }
+}
+
+/* Profile/Business Header Responsive */
+.profile-header,
+.business-header {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+    margin-bottom: 2rem;
+}
+
+@media (max-width: 768px) {
+
+    .profile-header,
+    .business-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+}
+
+/* Skill Tags Responsive */
+.skills-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+@media (max-width: 480px) {
+    .skills-list {
+        justify-content: center;
+    }
+}
+
+/* Welcome Section Responsive */
+.welcome-section {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+@media (max-width: 480px) {
+    .welcome-section {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .dashboard-avatar,
+    .dashboard-avatar-placeholder {
+        margin: 0 auto;
+    }
+}
+
+/* No Content States Responsive */
+.no-businesses,
+.no-profile {
+    text-align: center;
+    padding: 3rem 1.5rem;
+    background: var(--card-bg);
+    border-radius: 8px;
+}
+
+@media (max-width: 480px) {
+
+    .no-businesses,
+    .no-profile {
+        padding: 2rem 1rem;
+    }
+}
+
+/* Page Header Responsive */
+.page-header {
+    margin-bottom: 2rem;
+}
+
+.page-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+@media (max-width: 768px) {
+    .page-header h1 {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .page-header h1 {
+        font-size: 1.75rem;
+    }
+}
+
+/* Ensure proper image sizing */
+.profile-photo,
+.profile-photo-large,
+.dashboard-avatar,
+.business-logo {
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+/* Prevent content overflow */
+* {
+    max-width: 100%;
+}
+
+html,
+body {
+    max-width: 100vw;
+    overflow-x: hidden;
+}
+
+/* Responsive container padding */
+@media (max-width: 1400px) {
+    .container {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+    }
+}
+
+/* ========== STABILITY OVERRIDE - DISABLE ALL CARD MOVEMENTS ========== */
+
+/* Ensure cards stay stable - no transform on hover */
+.business-card,
+.professional-card,
+.stat-card,
+.info-card,
+.feature-card,
+.dashboard-card {
+    transform: none !important;
+    will-change: auto !important;
+}
+
+/* Remove GPU acceleration that might cause unwanted movement */
+.business-card,
+.professional-card,
+.feature-card,
+.stat-card,
+.info-card {
+    backface-visibility: visible !important;
+}
+
+/* Disable any floating or parallax classes */
+.floating-card {
+    animation: none !important;
+    transform: none !important;
+}
+
+.parallax {
+    transform: none !important;
+}
+
+/* Ensure no card tilting on mobile */
+@media (max-width: 768px) {
+
+    .business-card,
+    .professional-card,
+    .feature-card,
+    .stat-card {
+        will-change: auto !important;
+        transform: none !important;
+        backface-visibility: visible !important;
+    }
 }
